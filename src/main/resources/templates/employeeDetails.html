@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html th:replace="layouts/adminLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-primary-emphasis text-center mt-3 py-3">Employee's Details</h3>
+            <div class="offset-1 col-10 mt-3">
+                <div class="row">
+                    <div class="col-6">
+                        <h5>Name :<span class="lead" th:text="${employee.name}"></span></h5>
+                    </div>
+                    <div class="col-6">
+                        <h5>Phone Number :<span class="lead" th:text="${employee.phoneNumber}"></span></h5>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="row">
+                       <div class="col">
+                           <table class="table table-bordered">
+                               <thead>
+                               <tr>
+                                   <th>Id</th>
+                                   <th>Email</th>
+                                   <th>NRC</th>
+                                   <th>Date of Birth</th>
+                                   <th>Gender</th>
+                                   <th>address</th>
+                               </tr>
+                               </thead>
+                               <tbody>
+                               <tr>
+                                   <td th:text="${employee.employeeId}"></td>
+                                   <td th:text="${employee.email}"></td>
+                                   <td th:text="${employee.nrc}"></td>
+                                   <td th:text="${employee.dateOfBirth}"></td>
+                                   <td th:text="${employee.gender}"></td>
+                                   <td th:text="${employee.address}"></td>
+                               </tr>
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+                </div>
+                <div class="row" th:if="${employee.leaveForms.isEmpty()}">
+                    <h5 class="text-primary-emphasis text-center my-5">This employee has no leave form.</h5>
+                </div>
+               <div class="row" th:if="${!employee.leaveForms.isEmpty()}">
+                   <h3 class="my-3 text-primary text-primary-emphasis text-center">Employee's Leave Form</h3>
+                   <div class="row" th:each="form : ${employee.leaveForms}">
+                       <div class="col">
+                           <table class="table table-bordered">
+                               <thead style="background-color: lightgoldenrodyellow">
+                               <tr>
+                                   <th>No</th>
+                                   <th>FromDate</th>
+                                   <th>ToDate</th>
+                                   <th>Leave Type</th>
+                               </tr>
+                               </thead>
+                               <tbody>
+                               <tr>
+                                   <td th:text="${form.id}"></td>
+                                   <td th:text="${form.fromDate}"></td>
+                                   <td th:text="${form.toDate}"></td>
+                                   <td th:text="${form.leaveType}"></td>
+                               </tr>
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+
+               </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

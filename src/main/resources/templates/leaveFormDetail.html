@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html th:replace="layouts/employeeLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-success text-center mt-3 py-3">Leave Form Details</h3>
+            <div class="offset-1 col-10 mt-3">
+                <div class="row">
+                    <div class="col-6">
+                        <h5>Name :<span class="lead" th:text="${formDetails.name}"></span></h5>
+                    </div>
+                    <div class="col-6">
+                        <h5>Phone Number :<span class="lead" th:text="${formDetails.phoneNumber}"></span></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>NRC</th>
+                                    <th>Date of Birth</th>
+                                    <th>Gender</th>
+                                    <th>address</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${formDetails.email}"></td>
+                                    <td th:text="${formDetails.nrc}"></td>
+                                    <td th:text="${formDetails.dateOfBirth}"></td>
+                                    <td th:text="${formDetails.gender}"></td>
+                                    <td th:text="${formDetails.address}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" th:if="${!formDetails.leaveForms.isEmpty()}">
+                    <div class="row" th:each="form : ${formDetails.leaveForms}">
+                        <div class="col">
+                            <table class="table table-bordered text-center">
+                                <thead style="background-color: lightgoldenrodyellow">
+                                <tr>
+                                    <th>FromDate</th>
+                                    <th>ToDate</th>
+                                    <th>Leave Type</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${form.fromDate}"></td>
+                                    <td th:text="${form.toDate}"></td>
+                                    <td th:text="${form.leaveType}"></td>
+                                    <td>
+                                        <a th:href="@{'/delete-form?employeeId=' + ${formDetails.employeeId}}"
+                                           class="btn btn-danger w-25 me-2">Delete</a>
+                                        <a th:href="@{'/update-form?id=' + ${formDetails.employeeId}}"
+                                           class="btn btn-warning w-25 ms-2">Edit</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col">
+                            <a th:href="@{'/add-new-form?empId=' + ${formDetails.employeeId}}" class="btn btn-danger w-100">Add
+                                new Form</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

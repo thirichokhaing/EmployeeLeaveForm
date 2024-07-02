@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html th:replace="layouts/adminLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body >
+<main role="main">
+    <div class="container mt-5">
+        <div class="row" th:if="${formList?.size() > 0 and (formList.get(0).leaveForms == null or formList.get(0).leaveForms.isEmpty())}">
+            <h4 class="text-warning-emphasis text-center">There is no leave form</h4>
+        </div>
+        <div class="row mt-3" th:if="${formList?.size() >0 and (formList.get(0).leaveForms != null and !formList.get(0).leaveForms.isEmpty())}">
+            <div class="col">
+                    <h3 class="text-center text-success mb-5">Leave Form List</h3>
+                           <table class="table table-striped table-bordered" >
+                               <thead >
+                               <tr>
+                                   <th>No.</th>
+                                   <th>Name</th>
+                                   <th>Phone Number</th>
+                                   <th>FromDate</th>
+                                   <th>ToDate</th>
+                                   <th>Details</th>
+
+                               </tr>
+                               </thead>
+                               <tbody >
+                               <tr class="p-2" th:if="!${form.leaveForms.isEmpty()}"  th:each="form : ${formList}"  >
+                                   <td th:text="${form.employeeId}"></td>
+                                   <td th:text="${form.name}"></td>
+                                   <td th:text="${form.phoneNumber}"></td>
+                                   <td>
+                                       <ul style="list-style-type: none">
+                                           <li th:each="leaveForm : ${form.leaveForms}" th:text="${leaveForm.fromDate}"></li>
+                                       </ul>
+
+                                   </td>
+                                   <td>
+                                       <ul style="list-style-type: none">
+                                           <li th:each="leaveForm : ${form.leaveForms}" th:text="${leaveForm.toDate}"></li>
+                                       </ul>
+
+                                   </td>
+                                   <td>
+                                       <a th:href="@{'/employee/form-details?employeeId='+ ${form.employeeId}}" class="btn btn-outline-success">View</a>
+                                   </td>
+
+                               </tr>
+                               </tbody>
+                           </table>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

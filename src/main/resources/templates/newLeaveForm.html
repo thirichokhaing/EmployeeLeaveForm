@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="layouts/employeeLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="container">
+        <h3 class="text-center text-success mb-3 pt-5 text-decoration-underline">Employee Leave Form</h3>
+        <div class="row p-3 text-success-emphasis">
+            <div class="offset-3 col-md-6 ">
+                <form th:action="@{/add-new-form}" th:object="${form}" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">From Date</label>
+                            <input type="date" class="form-control" th:field="*{fromDate}">
+                        </div>
+                        <div class="col">
+                            <label class="form-label">To Date</label>
+                            <input type="date" class="form-control" th:field="*{toDate}">
+                        </div>
+                        <div class="col">
+                            <label for="leaveType" class="form-label">Leave Type</label>
+                            <select id="leaveType" class="form-select" th:field="*{leaveType}">
+                                <option th:each="leaveType : ${leaveTypes}" th:value="${leaveType}" th:text="${leaveType}">Leave Type
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col text-center">
+                            <button type="submit"
+                                    class="btn btn-outline-success w-50">
+                                Save Form
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

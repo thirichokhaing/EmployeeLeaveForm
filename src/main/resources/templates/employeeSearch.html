@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html th:replace="layouts/adminLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="row my-3">
+        <form th:action="@{/employee/form-search}" method="get">
+            <div class="d-flex justify-content-end">
+                <div class="input-group w-25 bg-warning bg-opacity-50">
+                    <input type="search" class="form-control" name="nameOrEmail" placeholder="search by name or email">
+                    <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass w-25"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-5 text-center text-danger-emphasis" th:if="${message != null && !message.isEmpty()}">
+        <p th:text="${message}"></p>
+    </div>
+   <div class="container mt-3" th:if="${message == null || message.isEmpty()}">
+       <div th:if="${employees.isEmpty()}">
+           <p>No Search Result</p>
+       </div>
+       <div th:if="${!employees.isEmpty()}">
+           <h5>Search Results:</h5>
+           <div class="row my-3">
+               <div class="col-md-12">
+                   <table class="table table-bordered">
+                       <thead>
+                       <tr>
+                           <th>Id</th>
+                           <th>Name</th>
+                           <th>Email</th>
+                           <th>Phone Number</th>
+                           <th>NRC</th>
+                           <th>Date Of Birth</th>
+                           <th>Gender</th>
+                           <th>Address</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr th:each="employee : ${employees}">
+                           <td th:text="${employee.employeeId}"></td>
+                           <td th:text="${employee.name}"></td>
+                           <td th:text="${employee.email}"></td>
+                           <td th:text="${employee.phoneNumber}"></td>
+                           <td th:text="${employee.nrc}"></td>
+                           <td th:text="${employee.dateOfBirth}"></td>
+                           <td th:text="${employee.gender}"></td>
+                           <td th:text="${employee.address}"></td>
+                       </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+       </div>
+   </div>
+</main>
+</body>
+</html>
