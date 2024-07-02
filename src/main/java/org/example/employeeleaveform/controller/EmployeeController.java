@@ -30,7 +30,7 @@ public class EmployeeController {
     @GetMapping("/form-search")
     public String findEmployeesByName(@RequestParam("nameOrEmail") String nameOrEmail, Model model) {
         if (nameOrEmail == null || nameOrEmail.isEmpty()) {
-            model.addAttribute("message", "You need find by email or name,Please enter keyword!!");
+            model.addAttribute("message", "You need to find by email or name,Please enter keyword!!");
         }else {
             model.addAttribute("employees",
                     employeeService.findEmployeeFormByNameOrEmail(nameOrEmail));
